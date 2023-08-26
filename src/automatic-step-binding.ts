@@ -32,7 +32,10 @@ export const createAutoBindSteps = (jestLike: IJestLike) => {
         features.forEach((feature) => {
             defineFeature(feature, (test) => {
                 const scenarioOutlineScenarios = feature.scenarioOutlines
-                    .map((scenarioOutline) => scenarioOutline.scenarios[0]);
+                    .map((scenarioOutline) => ({
+                        ...scenarioOutline.scenarios[0],
+                        title: scenarioOutline.title,
+                    }));
 
                 const scenarios = [...feature.scenarios, ...scenarioOutlineScenarios];
 
